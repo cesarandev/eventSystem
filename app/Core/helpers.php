@@ -26,3 +26,40 @@ function old(string $key, string $default = ''): string
 {
     return e($_POST[$key] ?? $default);
 }
+
+function statusBadge(string $status): string
+{
+    $map = [
+        // clients
+        'prospecto'    => ['badge-amber',   'Prospecto'],
+        'activo'       => ['badge-emerald',  'Activo'],
+        'recurrente'   => ['badge-indigo',   'Recurrente'],
+        'inactivo'     => ['badge-gray',     'Inactivo'],
+        // quotes
+        'borrador'     => ['badge-gray',     'Borrador'],
+        'enviada'      => ['badge-blue',     'Enviada'],
+        'negociacion'  => ['badge-amber',    'Negociación'],
+        'aprobada'     => ['badge-emerald',  'Aprobada'],
+        'perdida'      => ['badge-red',      'Perdida'],
+        // events
+        'programado'   => ['badge-blue',     'Programado'],
+        'confirmado'   => ['badge-indigo',   'Confirmado'],
+        'en_ejecucion' => ['badge-amber',    'En ejecución'],
+        'finalizado'   => ['badge-emerald',  'Finalizado'],
+        'cancelado'    => ['badge-red',      'Cancelado'],
+        // accounting
+        'pendiente'    => ['badge-amber',    'Pendiente'],
+        'pagado'       => ['badge-emerald',  'Pagado'],
+        'parcial'      => ['badge-blue',     'Parcial'],
+        'vencido'      => ['badge-red',      'Vencido'],
+        // services
+        'disponible'   => ['badge-emerald',  'Disponible'],
+        'alta_demanda' => ['badge-amber',    'Alta demanda'],
+        'mantenimiento'=> ['badge-red',      'Mantenimiento'],
+        // accounting type
+        'ingreso'      => ['badge-emerald',  'Ingreso'],
+        'egreso'       => ['badge-red',      'Egreso'],
+    ];
+    [$cls, $label] = $map[$status] ?? ['badge-gray', htmlspecialchars($status, ENT_QUOTES, 'UTF-8')];
+    return '<span class="badge ' . $cls . '">' . $label . '</span>';
+}
