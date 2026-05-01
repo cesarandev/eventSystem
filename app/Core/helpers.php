@@ -14,7 +14,12 @@ function money(string|int|float|null $value): string
 function active(string $path): string
 {
     $current = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
-    return rtrim($current, '/') === rtrim($path, '/') ? 'active' : '';
+
+    if ($path === '/') {
+        return $current === '/' ? 'active' : '';
+    }
+
+    return str_starts_with($current, rtrim($path, '/')) ? 'active' : '';
 }
 
 function old(string $key, string $default = ''): string

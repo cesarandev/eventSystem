@@ -31,6 +31,15 @@ abstract class Model
         return $statement->fetchAll();
     }
 
+    public function find(int $id): ?array
+    {
+        $statement = $this->db()->prepare("SELECT * FROM {$this->table} WHERE {$this->primaryKey} = :id LIMIT 1");
+        $statement->execute(['id' => $id]);
+        $record = $statement->fetch();
+
+        return $record ?: null;
+    }
+
     public function count(string $where = '1 = 1', array $params = []): int
     {
         $statement = $this->db()->prepare("SELECT COUNT(*) FROM {$this->table} WHERE {$where}");
@@ -64,5 +73,26 @@ abstract class Model
         $statement->execute($data);
 
         return (int) $this->db()->lastInsertId();
+    }
+
+    public function update(int $id, array $attributes): bool
+    {
+        $data = array_intersect_key($attributes, array_flip($this->fillable));
+
+        if ($data === []) {
+            return false;
+        }
+
+        $assignments = array_map(static fn(string $column): string => "{$column} = :{$column}", array_keys($data));
+        $data['id'] = $id;
+
+        $sql = sprintf(
+            'UPDATE %s SET %s WHERE %s = :id',
+            $this->table,
+            implode(', ', $assignments),
+            $this->primaryKey
+        );
+
+        return $this->db()->prepare($sql)->execute($data);
     }
 }

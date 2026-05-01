@@ -37,4 +37,17 @@ final class Event extends Model
 
         return $statement->fetchAll();
     }
+
+    public function withRelations(): array
+    {
+        $statement = $this->db()->query(
+            'SELECT events.*, clients.name AS client_name, quotes.code AS quote_code
+             FROM events
+             INNER JOIN clients ON clients.id = events.client_id
+             LEFT JOIN quotes ON quotes.id = events.quote_id
+             ORDER BY events.event_date DESC, events.start_time DESC'
+        );
+
+        return $statement->fetchAll();
+    }
 }
