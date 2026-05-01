@@ -27,6 +27,112 @@ body {
     font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+.setup-body {
+    min-height: 100vh;
+    background: #f5f7f3;
+}
+
+.setup-shell {
+    width: min(1100px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 42px 0;
+}
+
+.setup-hero {
+    min-height: 260px;
+    padding: 34px;
+    border-radius: 8px;
+    color: #fff;
+    display: grid;
+    align-content: end;
+    background:
+        linear-gradient(90deg, rgba(20, 33, 30, 0.94), rgba(20, 33, 30, 0.68)),
+        url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1800&q=80") center/cover;
+}
+
+.setup-hero h1 {
+    margin: 8px 0;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1;
+}
+
+.setup-hero p:last-child {
+    max-width: 680px;
+    margin: 0;
+    color: #dce9e4;
+}
+
+.setup-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 16px;
+    margin-top: 16px;
+    align-items: start;
+}
+
+.requirement-list {
+    display: grid;
+    gap: 10px;
+}
+
+.requirement-list div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+}
+
+.requirement-list span {
+    width: 56px;
+    text-align: center;
+    padding: 5px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.requirement-list .ok span {
+    color: #07584f;
+    background: #bdf2e6;
+}
+
+.requirement-list .fail span {
+    color: #7b1d1d;
+    background: #ffd8d8;
+}
+
+.setup-errors {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #f0b4b4;
+    color: #7b1d1d;
+    background: #fff0f0;
+    font-weight: 700;
+}
+
+.setup-errors p,
+.setup-note {
+    margin: 0;
+}
+
+.setup-note {
+    color: var(--muted);
+}
+
+.check {
+    display: flex !important;
+    grid-template-columns: none !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.check input {
+    width: auto;
+}
+
 a {
     color: var(--accent-dark);
     font-weight: 800;
@@ -682,7 +788,8 @@ td small {
 
     .dashboard-grid,
     .accounting-layout,
-    .grid-two {
+    .grid-two,
+    .setup-grid {
         grid-template-columns: 1fr;
     }
 }

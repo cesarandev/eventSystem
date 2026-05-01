@@ -1,4 +1,6 @@
 .env
+config/local.php
+storage/installed.lock
 vendor/
 node_modules/
 *.log

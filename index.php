@@ -7,6 +7,20 @@ session_start();
 
 define('BASE_PATH', __DIR__);
 
+if (PHP_SAPI === 'cli-server') {
+    $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
+    $filesystemPath = BASE_PATH . $requestPath;
+
+    if ($requestPath !== '/' && is_file($filesystemPath)) {
+        return false;
+    }
+
+    if ($requestPath !== '/' && is_dir($filesystemPath) && is_file($filesystemPath . '/index.php')) {
+        require $filesystemPath . '/index.php';
+        return;
+    }
+}
+
 spl_autoload_register(static function (string $class): void {
     $prefix = 'App\\';
 

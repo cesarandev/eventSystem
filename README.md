@@ -14,6 +14,18 @@ Aplicacion PHP MVC con MySQL para centralizar una empresa de eventos de recreaci
 
 ## Instalar base de datos
 
+### Opcion recomendada: instalador web
+
+1. Sube el proyecto a un servidor con PHP 8.1+ y MySQL.
+2. Asegura permisos de escritura en `config/` y `storage/`.
+3. Abre `/setup/` en el navegador.
+4. Ingresa host, puerto, base de datos, usuario y contrasena MySQL.
+5. El instalador crea/importa la base y genera `config/local.php`.
+
+Para reinstalar elimina `storage/installed.lock` y `config/local.php`.
+
+### Opcion manual
+
 ```bash
 mysql -u root -p < database/schema.sql
 ```
